@@ -6,4 +6,4 @@
 Omertà is a Southern Italian code of silence and code of honor that places importance on silence in the face of questioning by authorities or outsiders; non-cooperation with authorities, the government, or outsiders; [wikipedia](https://en.wikipedia.org/wiki/Omert%C3%A0)
 
 ## What is Omerta?
-![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack.png)
+![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack-1.png)
