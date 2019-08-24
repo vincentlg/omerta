@@ -1,22 +1,24 @@
 console.log("app");
-chrome.extension.onMessage.addListener(handleMessage);
+// chrome.extension.onMessage.addListener(handleMessage);
+//
+// function handleMessage(request) {
+//   console.log("handleMessage");
+//   console.log(request.data);
+// }
 
-function handleMessage(request) {
-  console.log("handleMessage");
-  console.log(request.data);
-}
+// Listen for messages
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    if (msg.text === 'getDom') {
+        console.log("getDom");
+        sendResponse(document);
+    }
 
-// chrome.tabs.query({
-//   active: true,
-//   currentWindow: true
-// }, function(tabs) {
-//   chrome.tabs.executeScript(
-//     tabs[0].id, {
-//       code: 'const world = "hellpo c Tangui"'
-//     });
-// });
-
-
+    if (msg.text === 'replace_all') {
+        console.log("replace_all");
+        document.body.innerHTML = msg.body.innerHTML
+        sendResponse("ok");
+    }
+});
 
 var s3 = document.createElement('script');
 s3.src = chrome.extension.getURL('web3.js');
@@ -48,12 +50,12 @@ s2.onload = function() {
 //   s5.parentNode.removeChild(s5);
 // };
 
-var s = document.createElement('script');
-s.src = chrome.extension.getURL('inject.js');
-(document.head || document.documentElement).appendChild(s);
-s.onload = function() {
-  s.parentNode.removeChild(s);
-};
+// var s = document.createElement('script');
+// s.src = chrome.extension.getURL('inject.js');
+// (document.head || document.documentElement).appendChild(s);
+// s.onload = function() {
+//   s.parentNode.removeChild(s);
+// };
 
 
 // chrome.runtime.onConnect.addListener(function(port) {

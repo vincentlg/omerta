@@ -2,22 +2,18 @@
 
 chrome.runtime.onInstalled.addListener(function() {
 
+  // chrome.browserAction.onClicked.addListener(function (tab) {
+  //   console.log("ici");
+  //   chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, doStuffWithDom);
+  // });
 
-  chrome.browserAction.onClicked.addListener(function(tab) {
-    // for the current tab, inject the "inject.js" file & execute it
-    chrome.tabs.executeScript(tab.ib, {
-      file: 'inject.js'
-    });
-    // chrome.tabs.sendMessage(tab.id, {counter: 1}, function(response) {});
-    console.log("before sendMessage");
-    chrome.runtime.sendMessage({
-      greeting: "hello"
-    }, function(response) {
-      console.log("sendMessage");
-
-      console.log(response.farewell);
-    });
-  });
+  // chrome.browserAction.onClicked.addListener(function(tab) {
+  //   // for the current tab, inject the "inject.js" file & execute it
+  //   chrome.tabs.executeScript(tab.ib, {
+  //     file: 'inject.js'
+  //   });
+  //
+  // });
   chrome.storage.sync.set({
     color: '#3aa757'
   }, function() {

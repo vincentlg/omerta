@@ -1,6 +1,40 @@
 'use strict';
 
+
+let secrets = new Object();
+const network = 'ropsten'
+var prefix = "omerta"
+var fbID = "tangui.clairet"
+const meAddress = '0x07AA1cBff46C82119e341524044052EFdaDA65BB'.toLowerCase()
+const mePrivateKey = '8A13A41613E6997BCC5C072614E944D45F95F9A83DC94410067FA2A0A297F287'.toLowerCase()
+var web3 = new Web3(new Web3.providers.HttpProvider("https://"+network+".infura.io/v3/18b3c51dbbdf42d1be2db61e945f88a9"));
+const mePublicKey = EthCrypto.publicKeyByPrivateKey(mePrivateKey)
+
 console.log("popup");
+function doStuffWithDom(dom) {
+    console.log('I received the body');
+    // body.innerHTML = "hello";
+
+    getSecrets()
+    getUserContent(dom)
+
+
+
+    chrome.tabs.query({
+      active: true,
+      currentWindow: true
+    }, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {text: 'replace_all', body:dom.body}, function noResponse(res) {
+      });
+    });
+}
+
+chrome.tabs.query({
+  active: true,
+  currentWindow: true
+}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {text: 'getDom'}, doStuffWithDom);
+});
 
 let changeColor = document.getElementById('changeColor');
 chrome.storage.sync.get('color', function(data) {
@@ -124,36 +158,71 @@ async function sendTx() {
 }
 
 
-function init() {
-  console.log("inside init");
-  chrome.runtime.onMessage.addListener(
-    function(message, callback) {
-      if (message == "runContentScript") {
-        chrome.tabs.executeScript({
-          file: 'injected.js'
-        });
-      }
-    });
-}
-
-console.log("before init");
-init()
-
-// const inpageContent = fs.readFileSync(path.join(__dirname, '..', '..', 'dist', 'chrome', 'inpage.js')).toString()
-// const inpageSuffix = '//# sourceURL=' + extension.runtime.getURL('inpage.js') + '\n'
-// const inpageBundle = inpageContent + inpageSuffix
-//
-// function injectScript (content) {
-//   try {
-//     const container = document.head || document.documentElement
-//     const scriptTag = document.createElement('script')
-//     scriptTag.setAttribute('async', false)
-//     scriptTag.textContent = content
-//     container.insertBefore(scriptTag, container.children[0])
-//     container.removeChild(scriptTag)
-//   } catch (e) {
-//     console.error('MetaMask script injection failed', e)
-//   }
+// function init() {
+//   console.log("inside init");
+//   chrome.runtime.onMessage.addListener(
+//     function(message, callback) {
+//       if (message == "runContentScript") {
+//         chrome.tabs.executeScript({
+//           file: 'injected.js'
+//         });
+//       }
+//     });
 // }
 //
-// injectScript(inpageBundle)
+// init()
+
+
+
+async function getSecrets() {
+  try {
+    const response = await axios.get('https://api-' + network + '.etherscan.io/api?module=account&action=txlist&address=' + meAddress + '&startblock=0&endblock=99999999&sort=asc&apikey=a');
+    transactions = response.data.result
+    for (var i = 0; i < transactions.length; i++) {
+      if (transactions[i].to == meAddress) {
+        var str = web3.utils.hexToUtf8(transactions[i].input);
+        var res = str.split(":")
+        if (res[0] == prefix) {
+          console.log("omerta tx found");
+
+          secret = await decodeSecret(res[2])
+          if (secret != "") {
+            secrets[res[1]] = secret;
+          }
+        }
+      }
+    }
+    console.log(secrets);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const getUserContent = (dom) => {
+  console.log(dom);
+  const collection = dom.getElementsByClassName('userContent')
+  const array = Array.from(collection)
+  const filter = array.map((element) => {
+    if (element.classList.contains('userContent') &&
+      element.childNodes.length > 0 &&
+      !element.classList.contains('omerta')
+    ) {
+      element.classList.add('omerta')
+      id = getFacebookProfileID(element)
+
+      // decode ici
+      if (secret[id] != "") {
+        element.childNodes.forEach((el) => {
+          var encrypted = CryptoJS.AES.decrypt(el.innerHTML, "Secret Passphrase");
+          el.innerHTML = encrypted
+        })
+      }
+      return element
+    }
+  })
+  if (filter.length > 0) {
+    return filter
+  }
+  return null
+}
