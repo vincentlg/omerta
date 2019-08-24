@@ -18,10 +18,10 @@ Bob and Alice are friends on Facebook.
 They install the Chrome browser extension "Omerta" and initialize it with their Ethereum account with enough Eth to make only 1 transaction on the mainnet.
 And that's all.
 
-Lorque Bob instal the extension, he create his mafia by filling the public keys of the member of his mafia (this step could be automated by allowing a Facebook app Omerta that would access the open graph api, we decided not to focus us on this part during the Hackathon)
+When Bob installs the extension, he creates his mafia by filling the public keys of the member of his mafia (this step could be automated by allowing a Facebook app Omerta that would access the open graph API, we decided not to focus on this part during the Hackathon)
 
 How to make sure that only Alice can decode Bob's messages? (and not Mark)
-Bob generates a secret locally, he encrypts it with Alice's public key, then sends a transaction to Alice with the encrypted secret in the data field of the transaction.
+Bob generates a secret locally, he encrypts it with Alice's public key, then sends a transaction to Alice with the encrypted secret in the data field of the transaction.(ECIES)
 
 Thanks to the browser extension, when Bob posts a new status on Facebook, Omerta encrypts the message before sending it to Facebook's Backend.
 
