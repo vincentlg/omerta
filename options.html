@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      button {
+        height: 20px;
+        width: 70px;
+        outline: none;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+     <div id="importAccountDiv">
+        <h1>Import Account With Private Key</h1>
+        <input placeholder="private key" type="text" name="sk" id="skInput">
+        <button id="importAccountButton" type="button">import</button>
+        <p id="result"></p>
+        <hr>
+        <h1>Allow this person to read my messages (by public key)</h1>
+        <input placeholder="public key" type="text" name="pk" id="pkInput">
+        <button width="100" id="importPubKeyButton" type="button">send</button>
+        <p id="result"></p>
+    </div>
+
+    <div id="buttonDiv">
+    </div>
+  </body>
+  
+  <script src="options.js"></script>
+</html>
