@@ -1,5 +1,7 @@
-# omerta: code of silence
 
+
+# omerta: code of silence
+<img src="https://github.com/vincentlg/omerta/blob/master/omerta-logo.svg" align="left" width="100" >
 This project is developed during the ETHBerlinZwei hackathon (2019).
 
 *Omertà is a Southern Italian code of silence and code of honor that places importance on silence in the face of questioning by authorities or outsiders; non-cooperation with authorities, the government, or outsiders; [wikipedia](https://en.wikipedia.org/wiki/Omert%C3%A0)*
@@ -18,14 +20,18 @@ Bob and Alice are friends on Facebook.
 They install the Chrome browser extension "Omerta" and initialize it with their Ethereum account with enough Eth to make only 1 transaction on the mainnet.
 And that's all.
 
-When Bob installs the extension, he creates his mafia by filling the public keys of the member of his mafia (this step could be automated by allowing a Facebook app Omerta that would access the open graph API, we decided not to focus on this part during the Hackathon)
+#### The user experience with Omerta
+When Bob installs the Omerta extension, he creates his mafia by filling the public keys of the member of his mafia (this step could be automated by allowing a Facebook app Omerta that would access the open graph API, we decided not to focus on this part during the Hackathon)
 
+#### Bob should always be able to decide who can access his messages
 How to make sure that only Alice can decode Bob's messages? (and not Mark)
 Bob generates a secret locally, he encrypts it with Alice's public key, then sends a transaction to Alice with the encrypted secret in the data field of the transaction.(ECIES)
 
-Thanks to the browser extension, when Bob posts a new status on Facebook, Omerta encrypts the message before sending it to Facebook's Backend.
+#### Facebook is an untrusted channel, so encrypt everything sent to him!
+Thanks to the Omerta browser extension, when Bob posts a new status on Facebook, Omerta encrypts the message before sending it to Facebook's Backend.
 
-When Alice loads her Facebook wallet with all the statuses of her friends, Bob's encrypted status is decoded and replaced on the fly in HTML by the Omerta extension.
+#### Keep a great user experience for Alice
+When Alice loads her Facebook Wall with the status of all her friends, Bob's encrypted status is decoded and replaced on the fly in HTML by the Omerta extension.
 
 With this system, Bob and Alice have all the advantages of Facebook without the disadvantages.
 
