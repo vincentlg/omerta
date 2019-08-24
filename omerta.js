@@ -66,8 +66,15 @@ window.onload = () => {
     }
   }
 
-  function facebookCopy () {
-    const copyText = document.querySelector('span[data-text=true]')
+  const copyText = () => {
+    let copyText
+    if (getCurrentPlatform() == PLATFORMS.FACEBOOK) {
+      copyText = document.querySelector('span[data-text=true]')
+    } else if (getCurrentPlatform() == PLATFORMS.TWITTER) {
+      const copyText = document.querySelector('div[class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"]').firstChild.firstChild
+    } else {
+      console.error('Unssuported platform')
+    }
     const textArea = document.createElement('textarea')
     textArea.value = 'Powned by Omerta'
     document.body.appendChild(textArea)
@@ -79,11 +86,9 @@ window.onload = () => {
   const encryptWithOmerta = () => {
     switch (getCurrentPlatform()) {
       case PLATFORMS.FACEBOOK:
-        facebookCopy()
-        return
+        return copyText()
       case PLATFORMS.TWITTER:
-        // TODO: Do something
-        return
+        return copyText()
       default:
         console.error('Unsupported')
     }
@@ -129,18 +134,17 @@ window.onload = () => {
       ) {
         element.classList.add('omerta')
         const ID = getTwitterProfileID(element)
+
         const tweetData = element.lastChild.childNodes[1]
         if (tweetData.length > 1) {
           tweetData.innerHTML = 'Hello from Omerta!'
-          return tweetData.innerHTML
-          // const tweet = mergeInnerHTML(tweetData)
-          // return tweet
+          // tweetData.innerHTML = mergeInnerHTML(tweetData)
         } else {
           tweetData.innerHTML = 'Hello From Omerta !'
-          return tweetData.innerHTML
-          // const tweet = tweetData.firstChild.innerHTML
-          // return tweet
+          // tweetData.innerHTML = tweetData.firstChild.innerHTML
         }
+        // TODO: Decrypt Tweet
+        return tweetData
       }
     })
     if (filter.length > 0) {
@@ -207,9 +211,7 @@ window.onload = () => {
       omertaParent.setAttribute('class', 'css-18t94o4 css-1dbjc4n r-urgr8i r-42olwf r-sdzlij r-1phboty r-rs99b7 r-1w2pmg r-1un7vkp r-145lgeb r-9u3a9d r-1fneopy r-o7ynqc r-6416eg r-lrvibr')
       omertaParent.firstChild.firstChild.innerHTML = 'Omerta Encrypt&Copy'
       omertaParent.setAttribute('id', 'omerta-encrypt-toggle')
-      omertaParent.addEventListener('click', () => {
-        console.log('hellllooooooo')
-      })
+      omertaParent.addEventListener('click', encryptWithOmerta)
       parent.insertBefore(omertaParent, submitParent)
     }
   }
