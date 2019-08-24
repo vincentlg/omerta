@@ -55,27 +55,31 @@ window.onload = () => {
   const decryptWithOmerta = () => {
     switch (getCurrentPlatform()) {
       case PLATFORMS.FACEBOOK:
+        // TODO: Do something
         return
       case PLATFORMS.TWITTER:
+        // TODO: Do something
         return
       default:
         console.error('Unsupported platform')
         return
     }
-    // TODO: Decrypt data
-    return ''
+  }
+
+  function facebookCopy () {
+    const copyText = document.querySelector('span[data-text=true]')
+    const textArea = document.createElement('textarea')
+    textArea.value = 'Powned by Omerta'
+    document.body.appendChild(textArea)
+    textArea.select()
+    document.execCommand('Copy')
+    textArea.remove()
   }
 
   const encryptWithOmerta = () => {
     switch (getCurrentPlatform()) {
       case PLATFORMS.FACEBOOK:
-        const copyText = document.querySelector('span[data-text=true]')
-        const textArea = document.createElement('textarea')
-        textArea.value = 'Powned by Omerta'
-        document.body.appendChild(textArea)
-        textArea.select()
-        document.execCommand('Copy')
-        textArea.remove()
+        facebookCopy()
         return
       case PLATFORMS.TWITTER:
         // TODO: Do something
@@ -127,10 +131,15 @@ window.onload = () => {
         const ID = getTwitterProfileID(element)
         const tweetData = element.lastChild.childNodes[1]
         if (tweetData.length > 1) {
-          const tweet = mergeInnerHTML(tweetData)
-          return tweet
+          tweetData.innerHTML = 'Hello from Omerta!'
+          return tweetData.innerHTML
+          // const tweet = mergeInnerHTML(tweetData)
+          // return tweet
         } else {
-          return tweetData.firstChild.innerHTML
+          tweetData.innerHTML = 'Hello From Omerta !'
+          return tweetData.innerHTML
+          // const tweet = tweetData.firstChild.innerHTML
+          // return tweet
         }
       }
     })
@@ -145,8 +154,10 @@ window.onload = () => {
   function getPlatformUserFeedObserver () {
     switch (getCurrentPlatform()) {
       case PLATFORMS.FACEBOOK:
+        console.log('Registering Facebook Observer')
         return new MutationObserver(parseFacebookUserFeed)
       case PLATFORMS.TWITTER:
+        console.log('Registering Twitter Observer')
         return new MutationObserver(parseTwitterUserFeed)
       default:
         console.error('Unsupported operation')
@@ -174,7 +185,6 @@ window.onload = () => {
   }
 
   const registerOmertaButtonFacebook = () => {
-    console.warn('Triggered registerOmertaButton')
     if (document.getElementById('omerta-encrypt-toggle') === null) {
       const submitButton = document.querySelector('button[type="submit"][data-testid="react-composer-post-button"]')
       const divParent = submitButton.parentElement.parentElement
@@ -182,6 +192,25 @@ window.onload = () => {
       omertaParent.innerHTML = ''
       addFacebookOmertaButton('button', 'omerta-encrypt-toggle', 'Encrypt with Omerta & Copy to Clipboard', 'encrypt-omerta', encryptWithOmerta, omertaParent)
       divParent.insertBefore(omertaParent, submitButton.parentElement)
+    }
+  }
+
+  const registerOmertaButtonTwitter = () => {
+    if (document.getElementById('omerta-encrypt-toggle') === null) {
+      const submitParent = document.querySelector('div[role="button"][data-testid="tweetButtonInline"]')
+      const parent = submitParent.parentElement
+      const omertaParent = submitParent.cloneNode(true)
+      omertaParent.setAttribute('data-testid', 'tweetButtonInline')
+      omertaParent.removeAttribute('disabled')
+      omertaParent.removeAttribute('class')
+      omertaParent.removeAttribute('aria-disabled')
+      omertaParent.setAttribute('class', 'css-18t94o4 css-1dbjc4n r-urgr8i r-42olwf r-sdzlij r-1phboty r-rs99b7 r-1w2pmg r-1un7vkp r-145lgeb r-9u3a9d r-1fneopy r-o7ynqc r-6416eg r-lrvibr')
+      omertaParent.firstChild.firstChild.innerHTML = 'Omerta Encrypt&Copy'
+      omertaParent.setAttribute('id', 'omerta-encrypt-toggle')
+      omertaParent.addEventListener('click', () => {
+        console.log('hellllooooooo')
+      })
+      parent.insertBefore(omertaParent, submitParent)
     }
   }
 
@@ -195,7 +224,7 @@ window.onload = () => {
         setTimeout(registerOmertaButtonFacebook, 1500)
       })
     case PLATFORMS.TWITTER:
-      return
+      return setTimeout(registerOmertaButtonTwitter, 1500)
     default:
       console.error('Unsupported platform')
   }
