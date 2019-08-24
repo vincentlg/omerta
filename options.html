@@ -2,9 +2,20 @@
 <html>
   <head>
     <style>
+      body {
+        width: 500px;
+        outline: none;
+        margin: 10px;
+      }
       button {
         height: 20px;
-        width: 70px;
+        width: 170px;
+        outline: none;
+        margin: 10px;
+      }
+      input {
+        height: 20px;
+        width: 350px;
         outline: none;
         margin: 10px;
       }
@@ -12,14 +23,19 @@
   </head>
   <body>
      <div id="importAccountDiv">
-        <h1>Import Account With Private Key</h1>
-        <input placeholder="private key" type="text" name="sk" id="skInput">
+        <h2>Import your account with Private Key</h2>
+        <input type="password" placeholder="Enter your private key" type="text" name="sk" id="skInput">
+        <p id="actualKey"></p>
         <button id="importAccountButton" type="button">import</button>
-        <p id="result"></p>
+        <font color="green"><p id="skResult"></p></font>
+
         <hr>
-        <h1>Allow this person to read my messages (by public key)</h1>
-        <input placeholder="public key" type="text" name="pk" id="pkInput">
-        <button width="100" id="importPubKeyButton" type="button">send</button>
+        <h2>Add poeple to your Mafia</h2>
+        <input placeholder="Enter your FaceBook or Twitter profile ID" type="text" name="socialID" id="socialID">
+        <input placeholder="Enter his public key (not an address!)" type="text" name="pk" id="pkInput">
+        <button width="100" id="importPubKeyButton" type="button">Add To Your Mafia<sup>*</sup></button>
+        <font color="green"><p id="pubkeyResult"></p></font>
+        <p><i><sup>*</sup>You will send a transaction to share your decoding key. This key is encrypted with the recipient public key with ECIES (Elliptic Curve Integrated Encryption Scheme)</i><p>
         <p id="result"></p>
     </div>
 
@@ -27,5 +43,8 @@
     </div>
   </body>
   <script src="eth-crypto.js"></script>
+  <script src="web3.js"></script>
+  <script src="buffer.js"></script>
+  <script src="ethereumjs-tx.js"></script>
   <script src="options.js"></script>
 </html>
