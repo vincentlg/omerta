@@ -6,7 +6,10 @@ This project is developed during the ETHBerlinZwei hackathon (2019).
 
 *Omertà is a Southern Italian code of silence and code of honor that places importance on silence in the face of questioning by authorities or outsiders; non-cooperation with authorities, the government, or outsiders; [wikipedia](https://en.wikipedia.org/wiki/Omert%C3%A0)*
 
-##  Let's use Facebook, but with end-to-end encryption! 
+
+
+## Introduction
+####  Let's use Facebook, but with end-to-end encryption! 
 
 This is not a troll, people use Twitter and Facebook and it is not ready to change. People have their habits and above all, their friends and their network are on it and that create a significant retention of users.
 
@@ -36,6 +39,22 @@ When Alice loads her Facebook Wall with the status of all her friends, Bob's enc
 With this system, Bob and Alice have all the advantages of Facebook without the disadvantages.
 
 From Facebook's point of view, this hijacking is not easy to detect and sensure, and techniques of offustation can always be added to Omerta to get a head start.
+
+## What exactly did we do during the Hackatons?
+Design a technical solution to meet the initial idea
+Test an ECEIS implementation to validate that ethereum-identites could be used to send messages
+Create scripts to interchange the event to send a message on Facebook / Twitter
+Create Crawler to identify encrypted messages and replace them on the fly.
+
+## What we could not complete
+The script injection by the extension is not fully functional, but we have proved that it is technically possible, we ran out of time.
+
+## The team
+We are 3 developers (Backend / Blockchain)
+We work together at Rockside.io - We come from Paris and we are between 22 and 33 years old.
+
+## Licence
+MIT
 
 
 ## What is Omerta?
