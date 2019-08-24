@@ -2,31 +2,54 @@ window.onload = () => {
   const PLATFORMS = {
     FACEBOOK: 1,
     TWITTER: 2,
+    UNSUPPORTED: 3,
   }
-  // Facebook as default value
-  let currentPlatform = PLATFORMS.FACEBOOK
   /*
   Helper functions
    */
   const getCurrentPlatform = () => {
-    // TODO: check HREF
-    return currentPlatform
-  }
-  const setCurrentPlatform = (platform) => {
-    currentPlatform = platform
-  }
-  const getFacebookProfileID = (node) => {
-    const parent = node.parentNode
-    const aProfile = parent.firstChild.firstChild.firstChild
-    const url = aProfile.getAttribute('href')
-    const ID = (url.split('?')[0]).replace('https://www.facebook.com/', '')
-    console.warn(`FBID: ${ID}`)
-    return ID
+    const hostname = window.location.hostname
+    if (hostname.includes('facebook')) {
+      return PLATFORMS.FACEBOOK
+    } else if (hostname.includes('twitter')) {
+      return PLATFORMS.TWITTER
+    } else {
+      return PLATFORMS.UNSUPPORTED
+    }
   }
 
-  // TODO: Get Twitter Profile ID
+  const mergeInnerHTML = (children) => {
+    return children.map((child) => {
+      if (child.childNodes.length < 1) {
+        return child.innerHTML
+      } else {
+        return child.firstChild.innerHTML
+      }
+    })
+  }
+
+  const getFacebookProfileID = (node) => {
+    const parent = node.parentNode
+    if (parent !== null) {
+      const aProfile = parent.firstChild.firstChild.firstChild
+      if (aProfile !== null) {
+        const url = aProfile.getAttribute('href')
+        if (url.length > 0) {
+          return (url.split('?')[0]).replace('https://www.facebook.com/', '')
+        }
+      }
+    }
+    return null
+  }
+
   const getTwitterProfileID = (node) => {
-    return ''
+    if (node !== null) {
+      const idSelector = node.lastChild.firstChild.firstChild.firstChild.firstChild.firstChild.firstChild.firstChild.firstChild.firstChild
+      if (idSelector !== null) {
+        return idSelector.innerHTML
+      }
+    }
+    return null
   }
 
   const decryptWithOmerta = () => {
@@ -72,14 +95,14 @@ window.onload = () => {
    */
   const parseFacebookUserFeed = () => {
     const collection = document.getElementsByClassName('userContent')
-    const array = Array.from(collection)
+    const array = Array.from(collection) // Convert HTMLCollection to Array
     const filter = array.map((element) => {
       if (element.classList.contains('userContent') &&
         element.childNodes.length > 0 &&
         !element.classList.contains('omerta')
       ) {
         element.classList.add('omerta')
-        getFacebookProfileID(element)
+        const ID = getFacebookProfileID(element)
         element.childNodes.forEach((el) => {
           el.innerHTML = 'Hello from Omerta'
         })
@@ -92,8 +115,28 @@ window.onload = () => {
     return null
   }
 
-  // TODO: Get User Feed Message
   const parseTwitterUserFeed = () => {
+    const collection = document.querySelectorAll('div[data-testid="tweet"]')
+    const array = Array.from(collection) // Convert HTMLCollection to Array
+    const filter = array.map((element) => {
+      if (element.getAttribute('data-testid') === 'tweet' &&
+        element.childNodes.length > 0 &&
+        !element.classList.contains('omerta')
+      ) {
+        element.classList.add('omerta')
+        const ID = getTwitterProfileID(element)
+        const tweetData = element.lastChild.childNodes[1]
+        if (tweetData.length > 1) {
+          const tweet = mergeInnerHTML(tweetData)
+          return tweet
+        } else {
+          return tweetData.firstChild.innerHTML
+        }
+      }
+    })
+    if (filter.length > 0) {
+      return filter
+    }
     return null
   }
   // Watch for DOM changes on document.body
@@ -117,7 +160,7 @@ window.onload = () => {
   /*
     RegisterOmertaButton Observer
    */
-  const add = (type, id, value, name, fun, parent) => {
+  const addFacebookOmertaButton = (type, id, value, name, fun, parent) => {
     var element = document.createElement('input')
     element.type = type
     element.value = value // Really? You want the default value to be the type string?
@@ -137,7 +180,7 @@ window.onload = () => {
       const divParent = submitButton.parentElement.parentElement
       const omertaParent = submitButton.parentElement.cloneNode(true)
       omertaParent.innerHTML = ''
-      add('button', 'omerta-encrypt-toggle', 'Encrypt with Omerta & Copy to Clipboard', 'encrypt-omerta', encryptWithOmerta, omertaParent)
+      addFacebookOmertaButton('button', 'omerta-encrypt-toggle', 'Encrypt with Omerta & Copy to Clipboard', 'encrypt-omerta', encryptWithOmerta, omertaParent)
       divParent.insertBefore(omertaParent, submitButton.parentElement)
     }
   }
@@ -145,8 +188,15 @@ window.onload = () => {
   /*
     Toggle Facebook Post Input Observer
    */
-  const post_composer = document.getElementById('pagelet_composer')
-  post_composer.addEventListener('click', () => {
-    setTimeout(registerOmertaButtonFacebook, 1500)
-  })
+  switch (getCurrentPlatform()) {
+    case PLATFORMS.FACEBOOK:
+      const postComposer = document.getElementById('pagelet_composer')
+      return postComposer.addEventListener('click', () => {
+        setTimeout(registerOmertaButtonFacebook, 1500)
+      })
+    case PLATFORMS.TWITTER:
+      return
+    default:
+      console.error('Unsupported platform')
+  }
 }
