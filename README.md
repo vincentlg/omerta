@@ -69,7 +69,8 @@ todo
 The script injection by the extension is not fully functional, but we have proved that it is technically possible, we ran out of time.
 
 ## The team
-We are 3 developers (Backend / Blockchain)
+
+We are 3 developers (Backend / Blockchain) [Tangui Clairet](https://twitter.com/tangui_clairet), [Nicolas Law](https://twitter.com/nicolas_lyw), [Vincent Le Gallic](https://twitter.com/vincentLg), 
 We work together at Rockside.io - We come from Paris and we are between 22 and 33 years old.
 
 ## Licence
