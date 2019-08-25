@@ -6034,7 +6034,7 @@ const getTwitterProfileID = (node) => {
 }
 
 const copyText = () => {
-    const secret = JSON.parse(localStorage.getItem("mysecret"));
+    const secret = localStorage.getItem("mysecret");
     console.warn('Secret = ' + secret)
     let copyText
     if (getCurrentPlatform() == PLATFORMS.FACEBOOK) {
@@ -6043,7 +6043,7 @@ const copyText = () => {
         copyText = document.querySelector('div[class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"]').firstChild.firstChild
     }
     const textArea = document.createElement('textarea')
-    textArea.value = CryptoJS.AES.encrypt(copyText.innerText.toString(), 'iloveyou')
+    textArea.value = CryptoJS.AES.encrypt(copyText.innerText.toString(), secret)
     console.warn('Encoded = ' + textArea.value)
     document.body.appendChild(textArea)
     textArea.select()
