@@ -21,7 +21,7 @@ This project is developed during the ETHBerlinZwei hackathon (2019).
 
 This is not a troll, people use Twitter and Facebook and it is not ready to change. People have their habits and above all, their friends and their network are on it and that create a significant retention of users.
 
-Finally, in an ideal world we could continue to use our favorite social networks by adding a feature that would give us a real control of my data.
+Finally, in an ideal world we could continue to use our favorite social networks by adding a feature that would give us a real control of our data.
 
 Starting from this idea, we imagined a solution as smooth as possible for users of these social networks through the use of a browser extension.
 
