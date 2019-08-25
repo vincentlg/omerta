@@ -17,6 +17,9 @@ document.getElementById("importAccountButton").addEventListener("click", functio
     document.getElementById("skResult").innerHTML = 'Your account is loaded:'+account.address
     chrome.storage.sync.set({account: account}, function() {})
 
+    // TODO: change that to make it random
+    const secretMessage = 'iloveyou';
+    chrome.storage.sync.set({mysecret: secretMessage}, function() {})
 });
 
 document.getElementById("importPubKeyButton").addEventListener("click", function(){
@@ -37,10 +40,6 @@ async function sendTxToPubKey(recipientPubKey) {
       address: recipientAddress,
       publicKey: recipientPubKey
     }
-
-    // TODO: change that to make it random
-    const secretMessage = 'iloveyou';
-    chrome.storage.sync.set({mysecret: secretMessage}, function() {})
 
     sendWithSecret(sender, recipient, secretMessage)
 
