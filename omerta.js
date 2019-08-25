@@ -6033,31 +6033,18 @@ const getTwitterProfileID = (node) => {
     return null
 }
 
-const decryptWithOmerta = () => {
-    switch (getCurrentPlatform()) {
-        case PLATFORMS.FACEBOOK:
-            // TODO: Do something
-            return
-        case PLATFORMS.TWITTER:
-            // TODO: Do something
-            return
-        default:
-            console.error('Unsupported platform')
-            return
-    }
-}
-
 const copyText = () => {
+    const secret = localStorage.getItem("mysecret");
+    console.warn('Secret = ' + secret)
     let copyText
     if (getCurrentPlatform() == PLATFORMS.FACEBOOK) {
         copyText = document.querySelector('span[data-text=true]')
     } else if (getCurrentPlatform() == PLATFORMS.TWITTER) {
-        const copyText = document.querySelector('div[class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"]').firstChild.firstChild
-    } else {
-        console.error('Unssuported platform')
+        copyText = document.querySelector('div[class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"]').firstChild.firstChild
     }
     const textArea = document.createElement('textarea')
-    textArea.value = 'Powned by Omerta'
+    textArea.value = CryptoJS.AES.encrypt(copyText.innerText.toString(), secret)
+    console.warn('Encoded = ' + textArea.value)
     document.body.appendChild(textArea)
     textArea.select()
     document.execCommand('Copy')
@@ -6065,14 +6052,7 @@ const copyText = () => {
 }
 
 const encryptWithOmerta = () => {
-    switch (getCurrentPlatform()) {
-        case PLATFORMS.FACEBOOK:
-            return copyText()
-        case PLATFORMS.TWITTER:
-            return copyText()
-        default:
-            console.error('Unsupported')
-    }
+    return copyText()
 }
 
 /*
@@ -6115,36 +6095,36 @@ const parseFacebookUserFeed = () => {
 const parseTwitterUserFeed = () => {
     secrets = JSON.parse(localStorage.getItem("secrets"));
     if (secrets.length != 0) {
-      const collection = document.querySelectorAll('div[data-testid="tweet"]')
-      const array = Array.from(collection) // Convert HTMLCollection to Array
-      const filter = array.map((element) => {
-          if (element.getAttribute('data-testid') === 'tweet' &&
-              element.childNodes.length > 0 &&
-              !element.classList.contains('omerta')
-          ) {
-              element.classList.add('omerta')
-              const ID = getTwitterProfileID(element)
-              const tweetData = element.lastChild.childNodes[1]
-              let tweet
-              if (tweetData.length > 1) {
-                  tweet = mergeInnerHTML(tweet)
-              } else {
-                  tweet = tweetData.firstChild.innerHTML
-              }
-              if (secrets[ID]) {
-                  console.warn(`TWEET FOUND ${tweet}`)
-                  const bytes = CryptoJS.AES.decrypt(tweet, secrets[ID])
-                  const msg = bytes.toString(CryptoJS.enc.Utf8)
-                  console.warn(`TWEET DECODE ${msg}`)
-                  tweetData.innerHTML = msg
-              } else {
-                  tweetData.innerHTML = tweet
-              }
-          }
-      })
-      if (filter.length > 0) {
-          return filter
-      }
+        const collection = document.querySelectorAll('div[data-testid="tweet"]')
+        const array = Array.from(collection) // Convert HTMLCollection to Array
+        const filter = array.map((element) => {
+            if (element.getAttribute('data-testid') === 'tweet' &&
+                element.childNodes.length > 0 &&
+                !element.classList.contains('omerta')
+            ) {
+                element.classList.add('omerta')
+                const ID = getTwitterProfileID(element)
+                const tweetData = element.lastChild.childNodes[1]
+                let tweet
+                if (tweetData.length > 1) {
+                    tweet = mergeInnerHTML(tweet)
+                } else {
+                    tweet = tweetData.firstChild.innerHTML
+                }
+                if (secrets[ID]) {
+                    console.warn(`TWEET FOUND ${tweet}`)
+                    const bytes = CryptoJS.AES.decrypt(tweet, secrets[ID])
+                    const msg = bytes.toString(CryptoJS.enc.Utf8)
+                    console.warn(`TWEET DECODE ${msg}`)
+                    tweetData.innerHTML = msg
+                } else {
+                    tweetData.innerHTML = tweet
+                }
+            }
+        })
+        if (filter.length > 0) {
+            return filter
+        }
     }
     return null
 }
