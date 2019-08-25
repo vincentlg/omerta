@@ -28,7 +28,7 @@ document.getElementById("importPubKeyButton").addEventListener("click", function
 async function sendTxToPubKey(recipientPubKey) {
 
   chrome.storage.sync.get('account', function(data) {
-    
+
     let sender = data.account;
 
     const recipientAddress = EthCrypto.publicKey.toAddress(recipientPubKey);
@@ -38,16 +38,18 @@ async function sendTxToPubKey(recipientPubKey) {
       publicKey: recipientPubKey
     }
 
+    // TODO: change that to make it random
     const secretMessage = 'iloveyou';
+    chrome.storage.sync.set({mysecret: secretMessage}, function() {})
 
     sendWithSecret(sender, recipient, secretMessage)
-    
+
   });
 
 }
 
 async function sendWithSecret(sender, recipient, secretMessage) {
-  
+
   const node = 'https://ropsten.infura.io/'
   const web3 = new Web3( new Web3.providers.HttpProvider(node))
 
@@ -86,7 +88,7 @@ async function sendWithSecret(sender, recipient, secretMessage) {
     web3.eth.sendSignedTransaction('0x' + serializedTransaction.toString('hex'))
     .on('transactionHash', async function(hash){
       console.log(hash);
-      
+
       document.getElementById("pubkeyResult").innerHTML = 'Your TX is on the road :'+hash
     })
     .on('error', function(err){

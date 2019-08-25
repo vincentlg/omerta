@@ -10,8 +10,14 @@ function nullHandler(truc) {
 chrome.tabs.query({active: true, currentWindow: true}, async function(tabs) {
   chrome.storage.sync.get('account', async function(data) {
     let secrets = await getSecrets(data)
-    console.log("send message");
+    console.log("send message account");
+    console.log(secrets);
     chrome.tabs.sendMessage(tabs[0].id, {text: 'secrets', secrets: secrets}, nullHandler);
+  });
+  chrome.storage.sync.get('mysecret', async function(data) {
+    console.log("send message mysecret");
+    console.log(data.mysecret);
+    chrome.tabs.sendMessage(tabs[0].id, {text: 'mysecret', mysecret: data.mysecret}, nullHandler);
   });
 });
 
