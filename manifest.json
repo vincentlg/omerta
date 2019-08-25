@@ -28,5 +28,6 @@
   "content_scripts": [{
     "js": ["app.js"],
     "matches": ["https://*/*"]
-  }]
+  }],
+  "web_accessible_resources": ["omerta.js"]
 }
