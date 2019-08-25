@@ -5972,11 +5972,11 @@
 }));
 
 let secrets = {}
-secrets['@nicolas_lyw'] = 'rockside'
-secrets['guarrie.conpi'] = 'rockside'
+// secrets['@nicolas_lyw'] = 'rockside'
+// secrets['guarrie.conpi'] = 'rockside'
 
-console.warn('SECRETS')
-console.warn(secrets)
+// console.warn('SECRETS')
+// console.warn(secrets)
 const mysecret = 'iloveyou'
 
 //window.onload = () => {
@@ -6113,35 +6113,38 @@ const parseFacebookUserFeed = () => {
 }
 
 const parseTwitterUserFeed = () => {
-    const collection = document.querySelectorAll('div[data-testid="tweet"]')
-    const array = Array.from(collection) // Convert HTMLCollection to Array
-    const filter = array.map((element) => {
-        if (element.getAttribute('data-testid') === 'tweet' &&
-            element.childNodes.length > 0 &&
-            !element.classList.contains('omerta')
-        ) {
-            element.classList.add('omerta')
-            const ID = getTwitterProfileID(element)
-            const tweetData = element.lastChild.childNodes[1]
-            let tweet
-            if (tweetData.length > 1) {
-                tweet = mergeInnerHTML(tweet)
-            } else {
-                tweet = tweetData.firstChild.innerHTML
-            }
-            if (secrets[ID]) {
-                console.warn(`TWEET FOUND ${tweet}`)
-                const bytes = CryptoJS.AES.decrypt(tweet, secrets[ID])
-                const msg = bytes.toString(CryptoJS.enc.Utf8)
-                console.warn(`TWEET DECODE ${msg}`)
-                tweetData.innerHTML = msg
-            } else {
-                tweetData.innerHTML = tweet
-            }
-        }
-    })
-    if (filter.length > 0) {
-        return filter
+    secrets = localStorage.getItem(JSON.parse("secrets"));
+    if (secrets.length != 0) {
+      const collection = document.querySelectorAll('div[data-testid="tweet"]')
+      const array = Array.from(collection) // Convert HTMLCollection to Array
+      const filter = array.map((element) => {
+          if (element.getAttribute('data-testid') === 'tweet' &&
+              element.childNodes.length > 0 &&
+              !element.classList.contains('omerta')
+          ) {
+              element.classList.add('omerta')
+              const ID = getTwitterProfileID(element)
+              const tweetData = element.lastChild.childNodes[1]
+              let tweet
+              if (tweetData.length > 1) {
+                  tweet = mergeInnerHTML(tweet)
+              } else {
+                  tweet = tweetData.firstChild.innerHTML
+              }
+              if (secrets[ID]) {
+                  console.warn(`TWEET FOUND ${tweet}`)
+                  const bytes = CryptoJS.AES.decrypt(tweet, secrets[ID])
+                  const msg = bytes.toString(CryptoJS.enc.Utf8)
+                  console.warn(`TWEET DECODE ${msg}`)
+                  tweetData.innerHTML = msg
+              } else {
+                  tweetData.innerHTML = tweet
+              }
+          }
+      })
+      if (filter.length > 0) {
+          return filter
+      }
     }
     return null
 }
