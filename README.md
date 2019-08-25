@@ -80,15 +80,17 @@ The extension has been successfully installed
 
 ### Run Omerta for the first time
 ![omerta](https://github.com/vincentlg/omerta/blob/master/popup.png)
-Clic on the Extension icon
 
-![omerta](https://github.com/vincentlg/omerta/blob/master/option.png)
+- Clic on the Extension icon
+
+![omerta](https://github.com/vincentlg/omerta/blob/master/options.png)
+
 - Import your Eth Account by private Key
 - import your Mafia members by ID (twitter or Facebook) and by their Public Key (not Address)
 
 
 ## What we could not complete
-The script injection by the extension is not fully functional, but we have proved that it is technically possible, we ran out of time.
+The script injection by the extension is not fully functional on Facebook, but we have proved that it is technically possible, we ran out of time.
 
 ## The team
 
