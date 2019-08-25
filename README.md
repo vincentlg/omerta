@@ -52,7 +52,7 @@ From Facebook's point of view, this hijacking is not easy to detect and sensure,
 
 ## What exactly did we do during the Hackatons?
 - Design a technical solution to meet the initial idea
-- Test an ECEIS implementation to validate that ethereum-identites could be used to send messages
+- Try ECEIS implementation to validate that ethereum-identites could be used to share a secret onchain
 - Create Scripts to interchange the event to send a message on Facebook / Twitter
 - Create Crawler to identify encrypted messages and replace them on the fly.
 - Create Scripts to restrieve a specific tx by a sheme in the data (omerta:userid:encryptedsecret)
