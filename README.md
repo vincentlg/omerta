@@ -60,7 +60,7 @@ From Facebook's point of view, this hijacking is not easy to detect and sensure,
 - Create Chrome Extension who integrates and orchestrates all these scripts
 
 ## The Demo
-[![Watch the video](https://github.com/vincentlg/omerta/blob/master/video.png)](https://www.youtube.com/watch?v=PclnZebY-Wg&feature=youtu.be)
+[![Watch the video](https://img.youtube.com/vi/PclnZebY-Wg/hqdefault.jpg)](https://www.youtube.com/watch?v=PclnZebY-Wg&feature=youtu.be)
 
 ## Install & Test
 All the code of the extension is a the root of this repo (master tree) - (Warning, the code is quite instable)
