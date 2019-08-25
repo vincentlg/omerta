@@ -79,7 +79,7 @@ The directory holding the manifest file can be added as an extension in develope
 The extension has been successfully installed
 
 ## What we could not complete
-The script injection by the extension is not fully functional, but we have proved that it is technically possible, we ran out of time.
+The script injection by the extension is not fully functional with Facebook, but we have proved that it is technically possible, we ran out of time.
 
 ## The team
 
