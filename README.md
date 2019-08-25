@@ -60,10 +60,21 @@ From Facebook's point of view, this hijacking is not easy to detect and sensure,
 - Create Chrome Extension who integrates and orchestrates all these scripts
 
 ## The Demo
-todo
+[![Watch the video](https://github.com/vincentlg/omerta/blob/master/video.png)](https://www.youtube.com/watch?v=PclnZebY-Wg&feature=youtu.be)
 
 ## Install & Test
-todo
+All the code of the extension is a the root of this repo (master tree) - (Warning, the code is quite instable)
+The directory holding the manifest file can be added as an extension in developer mode in its current state.
+
+- Open the Extension Management page by navigating to chrome://extensions.
+- The Extension Management page can also be opened by clicking on the Chrome menu, hovering over More Tools then selecting Extensions.
+- Enable Developer Mode by clicking the toggle switch next to Developer mode.
+- Click the LOAD UNPACKED button and select the extension directory
+
+<img src="https://github.com/vincentlg/omerta/blob/master/load_extension.png" width="300" >
+
+
+The extension has been successfully installed
 
 ## What we could not complete
 The script injection by the extension is not fully functional, but we have proved that it is technically possible, we ran out of time.
