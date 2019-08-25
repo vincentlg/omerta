@@ -51,10 +51,12 @@ From Facebook's point of view, this hijacking is not easy to detect and sensure,
 ![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack.svg)
 
 ## What exactly did we do during the Hackatons?
-Design a technical solution to meet the initial idea
-Test an ECEIS implementation to validate that ethereum-identites could be used to send messages
-Create scripts to interchange the event to send a message on Facebook / Twitter
-Create Crawler to identify encrypted messages and replace them on the fly.
+- Design a technical solution to meet the initial idea
+- Test an ECEIS implementation to validate that ethereum-identites could be used to send messages
+- Create Scripts to interchange the event to send a message on Facebook / Twitter
+- Create Crawler to identify encrypted messages and replace them on the fly.
+- Create Scripts to restrieve a specific tx by a sheme in the data (omerta:userid:encryptedsecret)
+- Create Chrome Extension who integrates and orchestrates all these scripts
 
 ## The Demo
 todo
