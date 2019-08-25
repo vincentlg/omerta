@@ -12,8 +12,9 @@ This project is developed during the ETHBerlinZwei hackathon (2019).
 3. [What exactly did we do during the Hackatons?](#What-exactly-did-we-do-during-the-Hackatons?)
 4. [The Demo](#the-demo)
 5. [What we could not complete](#What-we-could-not-complete)
-6. [The Team](#The-Team)
-7. [Licence](#Licence)
+6. [Install & Test](#Install-&-test)
+7. [The Team](#The-Team)
+8. [Licence](#Licence)
 
 ## Introduction
 ####  Let's use Facebook, but with end-to-end encryption! 
@@ -59,6 +60,9 @@ From Facebook's point of view, this hijacking is not easy to detect and sensure,
 - Create Chrome Extension who integrates and orchestrates all these scripts
 
 ## The Demo
+todo
+
+## Install & Test
 todo
 
 ## What we could not complete
