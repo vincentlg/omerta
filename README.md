@@ -48,7 +48,7 @@ With this system, Bob and Alice have all the advantages of Facebook without the 
 From Facebook's point of view, this hijacking is not easy to detect and sensure, and techniques of offustation can always be added to Omerta to get a head start.
 
 ## The Omerta diagram
-![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack-1.png)
+![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack.svg)
 
 ## What exactly did we do during the Hackatons?
 Design a technical solution to meet the initial idea
