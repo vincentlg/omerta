@@ -7,6 +7,10 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
         console.log(msg.secrets);
         localStorage.setItem("secrets", JSON.stringify(msg.secrets))
     }
+    if (msg.text === 'mysecret') {
+        console.log(msg.mysecret);
+        localStorage.setItem("mysecret", msg.mysecret)
+    }
 });
 
 // var s5 = document.createElement('script');

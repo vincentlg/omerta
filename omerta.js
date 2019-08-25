@@ -6113,7 +6113,7 @@ const parseFacebookUserFeed = () => {
 }
 
 const parseTwitterUserFeed = () => {
-    secrets = localStorage.getItem(JSON.parse("secrets"));
+    secrets = JSON.parse(localStorage.getItem("secrets"));
     if (secrets.length != 0) {
       const collection = document.querySelectorAll('div[data-testid="tweet"]')
       const array = Array.from(collection) // Convert HTMLCollection to Array
