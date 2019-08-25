@@ -6,7 +6,14 @@ This project is developed during the ETHBerlinZwei hackathon (2019).
 
 *Omertà is a Southern Italian code of silence and code of honor that places importance on silence in the face of questioning by authorities or outsiders; non-cooperation with authorities, the government, or outsiders; [wikipedia](https://en.wikipedia.org/wiki/Omert%C3%A0)*
 
-
+# Table of Contents
+1. [Introduction](#Introduction)
+2. [The Omerta diagram](#The-Omerta-diagram)
+3. [What exactly did we do during the Hackatons?](#What-exactly-did-we-do-during-the-Hackatons?)
+4. [The Demo](#the-demo)
+5. [What we could not complete](#What-we-could-not-complete)
+6. [The Team](#The-Team)
+7. [Licence](#Licence)
 
 ## Introduction
 ####  Let's use Facebook, but with end-to-end encryption! 
@@ -40,11 +47,17 @@ With this system, Bob and Alice have all the advantages of Facebook without the 
 
 From Facebook's point of view, this hijacking is not easy to detect and sensure, and techniques of offustation can always be added to Omerta to get a head start.
 
+## The Omerta diagram
+![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack-1.png)
+
 ## What exactly did we do during the Hackatons?
 Design a technical solution to meet the initial idea
 Test an ECEIS implementation to validate that ethereum-identites could be used to send messages
 Create scripts to interchange the event to send a message on Facebook / Twitter
 Create Crawler to identify encrypted messages and replace them on the fly.
+
+## The Demo
+todo
 
 ## What we could not complete
 The script injection by the extension is not fully functional, but we have proved that it is technically possible, we ran out of time.
@@ -56,6 +69,3 @@ We work together at Rockside.io - We come from Paris and we are between 22 and 3
 ## Licence
 MIT
 
-
-## What is Omerta?
-![omerta](https://github.com/vincentlg/omerta/blob/master/berlin-hack-1.png)
