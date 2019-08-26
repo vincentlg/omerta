@@ -65,6 +65,8 @@ Watch the video!
 [![Watch the video](https://img.youtube.com/vi/PclnZebY-Wg/hqdefault.jpg)](https://www.youtube.com/watch?v=PclnZebY-Wg&feature=youtu.be)
 
 ## Install & Test
+*Disclaimer: this is just a prototype create in a few hours for fun, do not use it for a real project*
+
 All the code of the extension is a the root of this repo (master tree) - (Warning, the code is quite instable)
 The directory holding the manifest file can be added as an extension in developer mode in its current state.
 
