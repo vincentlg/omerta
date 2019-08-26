@@ -16,8 +16,7 @@ document.getElementById("importAccountButton").addEventListener("click", functio
     document.getElementById("skResult").innerHTML = 'Your account is loaded:'+account.address
     chrome.storage.sync.set({account: account}, function() {})
 
-    // TODO: change that to make it random
-    const secretMessage = 'iloveyou';
+    const secretMessage = Math.floor(1000000000 + Math.random() * 9000000000).toString(16)
     chrome.storage.sync.set({mysecret: secretMessage}, function() {})
 });
 
