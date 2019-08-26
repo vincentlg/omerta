@@ -13,12 +13,12 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     }
 });
 
-// var s5 = document.createElement('script');
-// s5.src = chrome.extension.getURL('cryptojs.js');
-// (document.head || document.documentElement).appendChild(s5);
-// s5.onload = function() {
-//   s5.parentNode.removeChild(s5);
-// };
+var s5 = document.createElement('script');
+s5.src = chrome.extension.getURL('cryptojs.js');
+(document.head || document.documentElement).appendChild(s5);
+s5.onload = function() {
+  s5.parentNode.removeChild(s5);
+};
 
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('omerta.js');

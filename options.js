@@ -3,7 +3,6 @@
 
 
 document.getElementById("importAccountButton").addEventListener("click", function(){
-
     const senderPrivateKey = document.getElementById("skInput").value;
     const senderPublicKey = EthCrypto.publicKeyByPrivateKey(senderPrivateKey);
     const senderAddress = EthCrypto.publicKey.toAddress(senderPublicKey);
@@ -29,7 +28,6 @@ document.getElementById("importPubKeyButton").addEventListener("click", function
 });
 
 async function sendTxToPubKey(recipientPubKey) {
-
   chrome.storage.sync.get('account', function(data) {
 
     let sender = data.account;
@@ -40,11 +38,10 @@ async function sendTxToPubKey(recipientPubKey) {
       address: recipientAddress,
       publicKey: recipientPubKey
     }
-
-    sendWithSecret(sender, recipient, secretMessage)
-
+    chrome.storage.sync.get('mysecret', function(data2) {
+      sendWithSecret(sender, recipient, data2.mysecret)
+    })
   });
-
 }
 
 async function sendWithSecret(sender, recipient, secretMessage) {
