@@ -29,5 +29,5 @@
     "js": ["app.js"],
     "matches": ["https://*/*"]
   }],
-  "web_accessible_resources": ["omerta.js"]
+  "web_accessible_resources": ["omerta.js", "cryptojs.js"]
 }
